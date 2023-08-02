@@ -1,0 +1,53 @@
+### 1. create clinic
+POST http://localhost:8181/doctors?clinicId=
+Content-Type: application/json
+
+{
+  "name": "Ozod",
+  "surname": "Ahmedov",
+  "phone": "+998991112233",
+  "imageId": "",
+  "specialty": "Terapevt",
+  "scheduleList": [
+    {
+      "weekDay": "Dushanba",
+      "startWorkingTime": "08:00",
+      "endWorkingTime": "16:00"
+    },
+    {
+      "weekDay": "Chorshanba",
+      "startWorkingTime": "08:00",
+      "endWorkingTime": "14:00"
+    },
+    {
+      "weekDay": "Shanba",
+      "startWorkingTime": "08:00",
+      "endWorkingTime": "16:00"
+    }
+  ],
+  "roomId": "",
+  "experience": ""
+}
+
+### 2. get clinic by id
+GET http://localhost:8181/doctors/
+
+### 3. get all clinic
+GET http://localhost:8181/doctors
+
+### 3. update clinic
+PUT http://localhost:8181/doctors/
+Content-Type: application/json
+
+{
+  "name": "",
+  "address": "",
+  "phone": "",
+  "imageId": ""
+}
+
+### 5. delete clinic by id
+DELETE http://localhost:8181/doctors/
+
+### 6. get pagination
+GET http://localhost:8181/doctors/pagination/page=1&size=4

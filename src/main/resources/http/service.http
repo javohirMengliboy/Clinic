@@ -1,0 +1,28 @@
+### 1. create clinic
+POST http://localhost:8181/services
+Content-Type: application/json
+
+{
+  "name": "Ozod",
+  "price": 30
+}
+
+### 2. get clinic by id
+GET http://localhost:8181/doctors/
+
+### 3. get all clinic
+GET http://localhost:8181/doctors
+
+### 3. update clinic
+PUT http://localhost:8181/doctors/
+Content-Type: application/json
+
+{
+  "name": "",
+  "address": "",
+  "phone": "",
+  "imageId": ""
+}
+
+### 5. delete clinic by id
+DELETE http://localhost:8181/cldoctorsinics/

@@ -1,0 +1,34 @@
+### 1. create clinic
+POST http://localhost:8181/clinics
+Content-Type: application/json
+
+{
+  "name": "MEDPlus",
+  "address": "Chilonzor",
+  "imageId": "",
+  "phone": "+998991112233"
+}
+
+### 2. get clinic by id
+GET http://localhost:8181/clinics/
+
+### 3. get all clinic
+GET http://localhost:8181/clinics
+
+### 3. update clinic
+PUT http://localhost:8181/clinics/
+Content-Type: application/json
+
+{
+  "name": "",
+  "address": "",
+  "phone": "",
+  "imageId": ""
+}
+
+### 5. delete clinic by id
+DELETE http://localhost:8181/clinics/
+
+### 6. get pagination
+GET http://localhost:8181/clinics/pagination/page=1&size=4
+
