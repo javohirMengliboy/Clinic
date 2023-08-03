@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.dto.ClinicDTO;
 import com.example.dto.DoctorDTO;
 import com.example.entity.ClinicEntity;
+import com.example.mapper.DoctorMapper;
 import com.example.service.ClinicService;
 import com.example.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,17 @@ public class DoctorController {
         return ResponseEntity.ok().body(doctorService.getAll());
     }
 
+    @GetMapping(value = "/get_by_specialty")
+    public ResponseEntity<List<DoctorMapper>> getDoctorEntitiesBySpecialty(@RequestParam("specialty") String specialty) {
+        return ResponseEntity.ok().body(doctorService.getDoctorEntitiesBySpecialty(specialty));
+    }
+
+    @GetMapping(value = "/search")
+    public ResponseEntity<List<DoctorMapper>> search(@RequestParam("value") String value) {
+        return ResponseEntity.ok().body(doctorService.search(value));
+    }
+
+
     //      4. update clinic
     @PutMapping(value = "/{id}")
     public ResponseEntity<Boolean> update(@RequestBody DoctorDTO dto,
@@ -52,7 +64,7 @@ public class DoctorController {
     }
 
     //      6. get pagination
-    @GetMapping(value = "")
+    @GetMapping(value = "/pagination")
     public ResponseEntity<Page<DoctorDTO>> pagination(@RequestParam(name = "page") int page,
                                                       @RequestParam(name = "size") int size) {
         return ResponseEntity.ok().body(doctorService.pagination(page, size));

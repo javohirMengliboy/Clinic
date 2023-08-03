@@ -8,7 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class RoomDTO {
-    private String id;
+    private Integer id;
     private Integer orderNumber;
     private Integer clinicId;
     private Integer floorNumber;
@@ -17,7 +17,7 @@ public class RoomDTO {
     public RoomDTO() {
     }
 
-    public RoomDTO(String id, Integer orderNumber, Integer clinicId, Integer floorNumber, Boolean isEmpty) {
+    public RoomDTO(Integer id, Integer orderNumber, Integer clinicId, Integer floorNumber, Boolean isEmpty) {
         this.id = id;
         this.orderNumber = orderNumber;
         this.clinicId = clinicId;

@@ -3,26 +3,24 @@ POST http://localhost:8181/services
 Content-Type: application/json
 
 {
-  "name": "Ozod",
-  "price": 30
+  "serviceName": "Lor",
+  "clinicId": 202,
+  "price": 60000
 }
 
 ### 2. get clinic by id
-GET http://localhost:8181/doctors/
+GET http://localhost:8181/services/52
 
-### 3. get all clinic
-GET http://localhost:8181/doctors
 
 ### 3. update clinic
-PUT http://localhost:8181/doctors/
+PUT http://localhost:8181/services/1
 Content-Type: application/json
 
 {
-  "name": "",
-  "address": "",
-  "phone": "",
-  "imageId": ""
+  "serviceName": "Terapevt",
+  "clinicId": 52,
+  "price": 50
 }
 
 ### 5. delete clinic by id
-DELETE http://localhost:8181/cldoctorsinics/
+DELETE http://localhost:8181/services/1

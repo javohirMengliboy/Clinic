@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Table(name = "attaches")
 public class AttachEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+//    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @Column(name = "original_name")
@@ -29,10 +29,13 @@ public class AttachEntity {
     private String extension;
 
     @Column(name = "created_date")
-    private LocalDateTime createdDate;
+    private LocalDateTime createdDate = LocalDateTime.now();
 
     @OneToOne(mappedBy = "image")
     private ClinicEntity clinic;
+
+    @OneToOne(mappedBy = "image")
+    private DoctorEntity doctor;
 
     @OneToOne(mappedBy = "image")
     private MedicalCheckupEntity checkup;

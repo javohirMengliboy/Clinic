@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.controller.AttachController;
 import com.example.dto.ClinicDTO;
 import com.example.entity.ClinicEntity;
 import com.example.exp.AppBadRequestException;
@@ -18,6 +19,9 @@ import java.util.stream.Collectors;
 public class ClinicService {
     @Autowired
     private ClinicRepository clinicRepository;
+
+    @Autowired
+    private AttachController attachController;
     //      1. create
     public ClinicDTO create(ClinicDTO dto) {
         check(dto);
@@ -30,12 +34,14 @@ public class ClinicService {
         dto.setId(entity.getId());
         dto.setCreatedDate(entity.getCreatedDate());
         dto.setVisible(entity.getVisible());
-        return null;
+        return dto;
     }
 
     //      2. get by id
     public ClinicDTO getById(int id) {
-        return clinicRepository.findByIdAndVisibleTrue(id).map(this::toDTO).orElseThrow(()->  new ItemNotFoundException("Clinic not found"));
+        ClinicDTO dto = clinicRepository.findByIdAndVisibleTrue(id).map(this::toDTO).orElseThrow(()->  new ItemNotFoundException("Clinic not found"));
+//        attachController.open(dto.getImageId());
+        return dto;
     }
 
     //      3. get all
@@ -49,8 +55,8 @@ public class ClinicService {
 
     //      4. update clinic
     public Boolean update(ClinicDTO dto, int id) {
-        check(dto);
-        ClinicEntity entity = clinicRepository.findById(id).get();
+        checkName(dto.getName());
+        ClinicEntity entity = get(id);
         entity.setName(dto.getName());
         entity.setAddress(dto.getAddress());
         entity.setPhone(dto.getPhone());
@@ -61,8 +67,11 @@ public class ClinicService {
 
     //      5. delete clinic
     public Boolean delete(int id) {
-        int effectedRows = clinicRepository.deleteClinicById(id);
-        return effectedRows > 0;
+        ClinicEntity entity = get(id);
+        clinicRepository.delete(entity);
+        return true;
+//        int effectedRows = clinicRepository.deleteClinicById(id);
+//        return effectedRows > 0;
     }
 
 
@@ -103,10 +112,13 @@ public class ClinicService {
     }
 
     public Page<ClinicDTO> pagination(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
-        return clinicRepository.findAllClinicByVisibleTrue(pageable);
+        Pageable pageable = PageRequest.of(page-1, size, Sort.by("name"));
+        return clinicRepository.findAllByVisibleTrue(pageable);
     }
 
+    public ClinicEntity get(Integer id){
+        return clinicRepository.findById(id).orElseThrow(()->new ItemNotFoundException("Clinic not found"));
+    }
 
     //--------------------------------------------------------------
 }

@@ -28,6 +28,7 @@ public class ScheduleEntity {
     @Column(name = "doctor_id")
     private String doctorId;
     @ManyToOne()
-    @JoinColumn(name = "doctor_id")
+    @JoinColumn(name = "doctor_id",insertable = false, updatable = false)
     private DoctorEntity doctor;
+
 }

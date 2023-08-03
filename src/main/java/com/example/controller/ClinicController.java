@@ -49,7 +49,7 @@ public class ClinicController {
     }
 
     //      6. get pagination
-    @GetMapping(value = "")
+    @GetMapping(value = "/pagination")
     public ResponseEntity<Page<ClinicDTO>> pagination(@RequestParam(name = "page") int page,
                                                       @RequestParam(name = "size") int size){
         return ResponseEntity.ok().body(clinicService.pagination(page, size));

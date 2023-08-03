@@ -1,39 +1,47 @@
 ### 1. create clinic
-POST http://localhost:8181/doctors?clinicId=
+POST http://localhost:8181/doctors?clinicId=52
 Content-Type: application/json
 
 {
-  "name": "Ozod",
-  "surname": "Ahmedov",
-  "phone": "+998991112233",
-  "imageId": "",
-  "specialty": "Terapevt",
+  "name": "Mahmud",
+  "surname": "Qurbonov",
+  "phone": "+998901010808",
+  "imageId": "b63f0763-885e-4ac8-83a9-553277ddd9b1.jpg",
+  "age": 37,
+  "specialty": "Lor",
   "scheduleList": [
+
     {
       "weekDay": "Dushanba",
-      "startWorkingTime": "08:00",
-      "endWorkingTime": "16:00"
+      "startWorkingTime": "10:00",
+      "endWorkingTime": "19:00"
+    },
+    {
+      "weekDay": "Seshanba",
+      "startWorkingTime": "10:00",
+      "endWorkingTime": "19:00"
     },
     {
       "weekDay": "Chorshanba",
-      "startWorkingTime": "08:00",
-      "endWorkingTime": "14:00"
-    },
-    {
-      "weekDay": "Shanba",
-      "startWorkingTime": "08:00",
-      "endWorkingTime": "16:00"
+      "startWorkingTime": "10:00",
+      "endWorkingTime": "19:00"
     }
   ],
-  "roomId": "",
-  "experience": ""
+  "roomNumber": 9,
+  "experience": 11
 }
 
 ### 2. get clinic by id
-GET http://localhost:8181/doctors/
+GET http://localhost:8181/doctors/9eef0881-956c-46dd-b030-02a165399b48
 
 ### 3. get all clinic
 GET http://localhost:8181/doctors
+
+### 3. get by specialty
+GET http://localhost:8181/doctors/get_by_specialty?specialty=Terapevt
+
+### 3. get search
+GET http://localhost:8181/doctors/search?value=ah
 
 ### 3. update clinic
 PUT http://localhost:8181/doctors/
@@ -50,4 +58,51 @@ Content-Type: application/json
 DELETE http://localhost:8181/doctors/
 
 ### 6. get pagination
-GET http://localhost:8181/doctors/pagination/page=1&size=4
+GET http://localhost:8181/doctors/pagination?page=1&size=6
+
+### 1. create clinic
+POST http://localhost:8181/doctors?clinicId=52
+Content-Type: application/json
+
+{
+  "name": "Jasur",
+  "surname": "Mansurov",
+  "phone": "+998901010606",
+  "imageId": "fb6242fb-928a-4b65-85cf-217437821ee2.jpg",
+  "age": 31,
+  "specialty": "Xerurg",
+  "scheduleList": [
+    {
+      "weekDay": "Dushanba",
+      "startWorkingTime": "09:00",
+      "endWorkingTime": "16:00"
+    },
+    {
+      "weekDay": "Sechanba",
+      "startWorkingTime": "09:00",
+      "endWorkingTime": "16:00"
+    },
+    {
+      "weekDay": "Chorshanba",
+      "startWorkingTime": "09:00",
+      "endWorkingTime": "16:00"
+    },
+    {
+      "weekDay": "Payshanba",
+      "startWorkingTime": "09:00",
+      "endWorkingTime": "14:00"
+    },
+    {
+      "weekDay": "Juma",
+      "startWorkingTime": "09:00",
+      "endWorkingTime": "14:00"
+    },
+    {
+      "weekDay": "Shanba",
+      "startWorkingTime": "09:00",
+      "endWorkingTime": "14:00"
+    }
+  ],
+  "roomNumber": 6,
+  "experience": 25
+}

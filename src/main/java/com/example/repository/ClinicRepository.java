@@ -28,5 +28,5 @@ public interface ClinicRepository extends CrudRepository<ClinicEntity, Integer> 
 
     Optional<ClinicEntity> findByIdAndVisibleTrue(int id);
     @Query("select new com.example.dto.ClinicDTO(id, name, address, phone, imageId) from ClinicEntity where visible = true ")
-    Page<ClinicDTO> findAllClinicByVisibleTrue(Pageable pageable);
+    Page<ClinicDTO> findAllByVisibleTrue(Pageable pageable);
 }

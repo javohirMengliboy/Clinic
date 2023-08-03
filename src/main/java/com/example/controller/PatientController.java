@@ -50,7 +50,7 @@ public class PatientController {
     }
 
     //      6. get pagination
-    @GetMapping(value = "")
+    @GetMapping(value = "/pagination")
     public ResponseEntity<Page<PatientsDTO>> pagination(@RequestParam(name = "page") int page,
                                                       @RequestParam(name = "size") int size) {
         return ResponseEntity.ok().body(patientService.pagination(page, size));

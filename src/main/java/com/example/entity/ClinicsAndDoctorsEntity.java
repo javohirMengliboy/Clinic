@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @Entity
@@ -11,7 +13,7 @@ import lombok.Setter;
 public class ClinicsAndDoctorsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Integer id;
 
     @Column(name = "clinic_id")
     private Integer clinicId;
@@ -24,4 +26,7 @@ public class ClinicsAndDoctorsEntity {
     @ManyToOne
     @JoinColumn(name = "doctor_id", insertable = false,updatable = false)
     private DoctorEntity doctor;
+
+    @Column(name = "created_date")
+    private LocalDateTime createdDate = LocalDateTime.now();
 }

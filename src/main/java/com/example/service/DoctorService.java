@@ -9,6 +9,7 @@ import com.example.entity.DoctorEntity;
 import com.example.entity.ScheduleEntity;
 import com.example.exp.AppBadRequestException;
 import com.example.exp.ItemNotFoundException;
+import com.example.mapper.DoctorMapper;
 import com.example.repository.ClinicRepository;
 import com.example.repository.ClinicsAndDoctorsRepository;
 import com.example.repository.DoctorRepository;
@@ -51,14 +52,15 @@ public class DoctorService {
         entity.setSurname(dto.getSurname());
         entity.setPhone(dto.getPhone());
         entity.setAge(dto.getAge());
+        entity.setImageId(dto.getImageId());
         entity.setSpecialty(dto.getSpecialty());
-        entity.setRoomId(dto.getRoomId());
+        entity.setRoomNumber(dto.getRoomNumber());
         entity.setExperience(dto.getExperience());
         doctorRepository.save(entity);
 
         ClinicsAndDoctorsEntity clinicsAndDoctorsEntity = new ClinicsAndDoctorsEntity();
         clinicsAndDoctorsEntity.setClinicId(clinicId);
-        clinicsAndDoctorsEntity.setDoctorId(dto.getId());
+        clinicsAndDoctorsEntity.setDoctorId(entity.getId());
         clinicsAndDoctorsRepository.save(clinicsAndDoctorsEntity);
 
         for (ScheduleDTO scheduleDTO : dto.getScheduleList()){
@@ -72,12 +74,12 @@ public class DoctorService {
 
         dto.setId(entity.getId());
         dto.setCreatedDate(entity.getCreatedDate());
-        return null;
+        return dto;
     }
 
     //      2. get by id
     public DoctorDTO getById(String id) {
-        return doctorRepository.findById(id).map(this::toDTO).orElseThrow(()->  new ItemNotFoundException("Clinic not found"));
+        return doctorRepository.findById(id).map(this::toDTO).orElseThrow(()->  new ItemNotFoundException("Doctor not found"));
     }
 
     //      3. get all
@@ -89,6 +91,31 @@ public class DoctorService {
         return entityList.stream().map(this::toDTO).collect(Collectors.toList());
     }
 
+    public List<DoctorMapper> getDoctorEntitiesBySpecialty(String specialty) {
+        List<DoctorMapper> mapperList =  doctorRepository.getDoctorEntitiesBySpecialty(specialty);
+        if (mapperList.isEmpty()){
+            throw new ItemNotFoundException("Clinic not found");
+        }
+        mapperList.forEach(e->{
+            List<String> list = scheduleRepository.getWorkingDaysByDoctorId(e.getId());
+            e.setWorkingDays(list);
+        });
+        return mapperList;
+    }
+
+    public List<DoctorMapper> search(String value) {
+        value = ("%"+value+"%").toLowerCase();
+        List<DoctorMapper> mapperList =  doctorRepository.search(value);
+        if (mapperList.isEmpty()){
+            throw new ItemNotFoundException("Doctor not found");
+        }
+        mapperList.forEach(e->{
+            List<String> list = scheduleRepository.getWorkingDaysByDoctorId(e.getId());
+            e.setWorkingDays(list);
+        });
+        return mapperList;
+    }
+
     //      4. update clinic
     public Boolean update(DoctorDTO dto, String id) {
         ProfileUtil.check(dto);
@@ -98,7 +125,7 @@ public class DoctorService {
         entity.setPhone(dto.getPhone());
         entity.setAge(dto.getAge());
         entity.setSpecialty(dto.getSpecialty());
-        entity.setRoomId(dto.getRoomId());
+        entity.setRoomNumber(dto.getRoomNumber());
         entity.setExperience(dto.getExperience());
         doctorRepository.save(entity);
         return true;
@@ -112,7 +139,7 @@ public class DoctorService {
 
     //      6. pagination
     public Page<DoctorDTO> pagination(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
+        Pageable pageable = PageRequest.of((page-1), size, Sort.by("name"));
         return doctorRepository.findAllDoctor(pageable).map(this::toDTO);
     }
 

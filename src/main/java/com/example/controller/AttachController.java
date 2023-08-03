@@ -45,7 +45,7 @@ public class AttachController {
     public ResponseEntity<List<AttachDTO>> pagination(@RequestParam("page") int page,
                                            @RequestParam("size") int size,
                                            HttpServletRequest request) {
-        SecurityUtil.hasRole(request, ProfileRole.MODERATOR);
+        SecurityUtil.hasRole(request, null);
         return ResponseEntity.ok().body(attachService.pagination(page,size));
     }
     @DeleteMapping(value = "/admin/delete/{id}")

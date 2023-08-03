@@ -12,17 +12,19 @@ import java.util.List;
 @ToString
 public class DoctorDTO extends BaseDTO{
     private String specialty;
+    private String imageId;
     private List<ScheduleDTO> scheduleList;
-    private Integer roomId;
+    private Integer roomNumber;
     private Integer experience;
     public DoctorDTO() {
     }
 
-    public DoctorDTO(String id, String name, String surname, String phone, Integer age, LocalDateTime createdDate, String specialty, List<ScheduleDTO> scheduleList, Integer roomId, Integer experience) {
+    public DoctorDTO(String id, String name, String surname, String phone, Integer age, LocalDateTime createdDate, String specialty, String imageId, List<ScheduleDTO> scheduleList, Integer roomNumber, Integer experience) {
         super(id, name, surname, phone, age, createdDate);
         this.specialty = specialty;
+        this.imageId = imageId;
         this.scheduleList = scheduleList;
-        this.roomId = roomId;
+        this.roomNumber = roomNumber;
         this.experience = experience;
     }
 }

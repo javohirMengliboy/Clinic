@@ -25,7 +25,7 @@ public class RoomEntity {
     private Integer floorNumber;
 
     @Column(name = "is_empty")
-    private Boolean isEmpty;
+    private Boolean isEmpty = true;
 
     @OneToOne(mappedBy = "room")
     private DoctorEntity doctor;

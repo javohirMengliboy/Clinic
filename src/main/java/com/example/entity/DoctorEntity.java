@@ -14,11 +14,17 @@ public class DoctorEntity extends BaseEntity{
     @Column()
     private String specialty;
 
-    @Column(name = "room_id")
-    private Integer roomId;
+    @Column(name = "room_number")
+    private Integer roomNumber;
     @OneToOne()
-    @JoinColumn(name = "room_id", insertable = false,updatable = false)
+    @JoinColumn(name = "room_number", insertable = false,updatable = false)
     private RoomEntity room;
+
+    @Column(name = "image_id")
+    private String imageId;
+    @OneToOne
+    @JoinColumn(name = "image_id",insertable = false, updatable = false)
+    private AttachEntity image;
 
     @Column()
     private Integer experience;

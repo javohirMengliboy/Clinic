@@ -28,7 +28,7 @@ public class ClinicEntity {
     @Column(name = "image_id")
     private String imageId;
     @OneToOne
-    @JoinColumn(name = "image_id")
+    @JoinColumn(name = "image_id",insertable = false, updatable = false)
     private AttachEntity image;
 
     @Column(name = "created_date")
@@ -38,7 +38,7 @@ public class ClinicEntity {
     private Boolean visible = true;
 
     @OneToMany(mappedBy = "clinic")
-    private List<ClinicsAndServicesEntity> clinicsAndServicesEntityList;
+    private List<ServicesEntity> servicesEntityList;
 
     @OneToMany(mappedBy = "clinic")
     private List<ClinicsAndDoctorsEntity> clinicsAndDoctorsEntityList;
